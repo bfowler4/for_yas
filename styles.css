@@ -1,0 +1,291 @@
+/* --- Variables --- */
+:root {
+  --color-bg: #9D00FF;
+  --color-surface: rgba(255, 255, 255, 0.12);
+  --color-text: #ffffff;
+  --color-accent: #ffe0ff;
+  --color-accent-soft: #f0d0f8;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Quicksand", system-ui, sans-serif;
+  --no-left: 50%;
+  --no-top: 50%;
+  --no-opacity: 1;
+  --yes-scale: 1;
+  --yes-margin-right: 0;
+}
+
+/* --- Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: clamp(14px, 2.5vw, 18px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(180, 80, 255, 0.5), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(120, 0, 200, 0.3), transparent);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+/* --- Views --- */
+.view {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.view--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Gallery fade-in: higher specificity so it overrides .view's transition */
+#gallery-view.view {
+  transition: opacity 2s ease-out, visibility 2s ease-out;
+}
+
+#gallery-view {
+  justify-content: flex-start;
+  padding-top: 2.5rem;
+  overflow: hidden;
+}
+
+/* --- Ask view --- */
+.ask-content {
+  text-align: center;
+  max-width: 28rem;
+}
+
+.ask-emoji {
+  font-size: clamp(4rem, 12vw, 6.4rem);
+  line-height: 1;
+  margin: 0 0 0.5rem;
+}
+
+.ask-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 600;
+  margin: 0 0 2.5rem;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 100px;
+  gap: 30px;
+}
+
+/* Yes button: grows over time via --yes-scale */
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn--yes {
+  margin-right: var(--yes-margin-right);
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, #ffffff, #f5e8ff);
+  color: #5c1a8a;
+  transform: scale(var(--yes-scale));
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn--yes:hover {
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25);
+}
+
+.btn--yes:active {
+  transform: scale(calc(var(--yes-scale) * 0.98));
+}
+
+/* No button: same size as Yes; when floating, glides around the page via --no-left, --no-top; fades via --no-opacity */
+.btn--no {
+  padding: 0.75rem 1.75rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.95);
+  opacity: var(--no-opacity, 1);
+  pointer-events: none;
+  user-select: none;
+  transition: left 0.35s ease-out, top 0.35s ease-out, opacity 0.4s ease-out;
+}
+
+.btn--no.no-button--floating {
+  position: fixed;
+  left: var(--no-left);
+  top: var(--no-top);
+  z-index: 10;
+}
+
+/* --- Heart rain --- */
+.heart-rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.heart-rain.is-active {
+  opacity: 1;
+}
+
+.heart-rain .heart-wrapper {
+  position: absolute;
+  top: 0;
+  transform: scale(0.75);
+  transform-origin: center top;
+  pointer-events: none;
+}
+
+.heart-rain .heart {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 2rem;
+  display: inline-block;
+  animation: heart-fall linear forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes heart-fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0.2;
+  }
+}
+
+/* --- Gallery view --- */
+.gallery-view .gallery-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.gallery-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.gallery-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-accent-soft);
+}
+
+.gallery-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  flex: 1;
+  min-height: 0;
+}
+
+.gallery-stage {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  height: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.gallery-nav {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-accent-soft);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.gallery-nav:hover {
+  background: rgba(255, 107, 157, 0.3);
+  color: var(--color-text);
+}
+
+.gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-shrink: 0;
+}
+
+.gallery-dots button {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 182, 193, 0.3);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.gallery-dots button:hover {
+  background: rgba(255, 182, 193, 0.5);
+}
+
+.gallery-dots button[aria-selected="true"] {
+  background: var(--color-accent);
+  transform: scale(1.2);
+}

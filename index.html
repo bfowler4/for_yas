@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will you be my Valentine? 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Heart rain container (shown during transition) -->
+  <div id="heart-rain" class="heart-rain" aria-hidden="true"></div>
+
+  <!-- Initial ask view -->
+  <main id="ask-view" class="view view--active">
+    <div class="ask-content">
+      <p class="ask-emoji" aria-hidden="true">🫶</p>
+      <h1 class="ask-title">Yas, will you be my valentine?</h1>
+      <div class="button-group">
+        <button type="button" id="btn-yes" class="btn btn--yes">Yes</button>
+        <button type="button" id="btn-no" class="btn btn--no">No</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Gallery view (hidden until Yes is clicked) -->
+  <main id="gallery-view" class="view">
+    <div class="gallery-header">
+      <h2 class="gallery-title">Happy Valentine's Day Yas ❤️</h2>
+      <!-- <p class="gallery-subtitle">Our moments together</p> -->
+    </div>
+    <div class="gallery-wrap">
+      <button type="button" id="gallery-prev" class="gallery-nav gallery-nav--prev" aria-label="Previous photo">&larr;</button>
+      <div class="gallery-stage">
+        <div class="gallery-slides">
+          <!-- Add your photo URLs here or use placeholder images -->
+          <div class="slide" data-index="0">
+            <img src="images/image_1.JPG" alt="Valentine moment 1" />
+          </div>
+          <div class="slide" data-index="1">
+            <img src="images/image_2.JPG" alt="Valentine moment 2" />
+          </div>
+          <div class="slide" data-index="2">
+            <img src="images/image_3.jpg" alt="Valentine moment 3" />
+          </div>
+          <div class="slide" data-index="3">
+            <img src="images/image_4.png" alt="Valentine moment 4" />
+          </div>
+          <div class="slide" data-index="4">
+            <img src="images/image_5.jpg" alt="Valentine moment 5" />
+          </div>
+        </div>
+      </div>
+      <button type="button" id="gallery-next" class="gallery-nav gallery-nav--next" aria-label="Next photo">&rarr;</button>
+    </div>
+    <div class="gallery-dots" id="gallery-dots" role="tablist"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
