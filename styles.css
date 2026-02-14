@@ -37,6 +37,10 @@ body {
   overflow-x: hidden;
 }
 
+input, textarea, select {
+  font-size: 18px !important;
+}
+
 /* --- Views --- */
 .view {
   position: fixed;
@@ -116,7 +120,6 @@ body {
   background: #ffffff;
   color: #000000;
   margin-bottom: 1rem;
-  font-size: 16px;
 }
 
 .btn--submit {
