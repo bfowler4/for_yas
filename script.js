@@ -6,7 +6,7 @@
   const YES_GROWTH_RATE = 0.03;
   const YES_GROWTH_ACCEL = 0.2;
   const YES_FADE_NO_AT_SCALE = 2.2;
-  const NO_FADE_RATE = 0.25;
+  const NO_FADE_RATE = 0.35;
   const NO_FLEE_DISTANCE = 140;
   const NO_FLEE_DISTANCE_FIRST = 180;
   const YES_NEAR_DISTANCE_FIRST = 110;
@@ -18,7 +18,10 @@
 
   const root = document.documentElement;
   const askView = document.getElementById('ask-view');
+  const startView = document.getElementById('start-view');
   const galleryView = document.getElementById('gallery-view');
+  const passwordInput = document.getElementById('password-input');
+  const submitPassword = document.getElementById('submit-password');
   const btnYes = document.getElementById('btn-yes');
   const btnNo = document.getElementById('btn-no');
   const heartRain = document.getElementById('heart-rain');
@@ -185,6 +188,24 @@
     }, 4000);
   }
 
+  function handleSubmitPassword() {
+    const password = passwordInput.value;
+    if (password === 'ilovecorn') {
+      showAskView();
+      startView.classList.remove('view--active');
+    } else {
+      alert('Invalid password');
+    }
+  }
+
+  function showAskView() {
+    askView.classList.add('view--active');
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('touchmove', function (e) {
+      if (e.touches.length) handleMouseMove(e.touches[0]);
+    });
+  }
+
   function showGallery() {
     answered = true;
     stopYesGrowth();
@@ -195,6 +216,8 @@
       updateGallerySlide();
     }, 3000);
   }
+
+
 
   var gallerySlidesEl = document.querySelector('.gallery-slides');
   var slideCount = slides.length;
@@ -267,14 +290,11 @@
     updateGallerySlide(false);
   }
 
+  submitPassword.addEventListener('click', handleSubmitPassword);
+
   btnYes.addEventListener('click', function () {
     if (answered) return;
     showGallery();
-  });
-
-  document.addEventListener('mousemove', handleMouseMove);
-  document.addEventListener('touchmove', function (e) {
-    if (e.touches.length) handleMouseMove(e.touches[0]);
   });
 
   initNoButtonPosition();

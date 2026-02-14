@@ -108,6 +108,23 @@ body {
   transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 
+#password-input {
+  width: 200px;
+  padding: 0.75rem 1.75rem;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.btn--submit {
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, #ffffff, #f5e8ff);
+  color: #5c1a8a;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
 .btn--yes {
   margin-right: var(--yes-margin-right);
   padding: 0.75rem 1.75rem;

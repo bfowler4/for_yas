@@ -13,8 +13,14 @@
   <!-- Heart rain container (shown during transition) -->
   <div id="heart-rain" class="heart-rain" aria-hidden="true"></div>
 
+  <main id="start-view" class="view view--active">
+    <h1>Password to access</h1>
+    <input type="password" id="password-input" placeholder="Enter password">
+    <button type="button" id="submit-password" class="btn btn--submit">Submit</button>
+  </main>
+
   <!-- Initial ask view -->
-  <main id="ask-view" class="view view--active">
+  <main id="ask-view" class="view">
     <div class="ask-content">
       <p class="ask-emoji" aria-hidden="true">🫶</p>
       <h1 class="ask-title">Yas, will you be my valentine?</h1>
